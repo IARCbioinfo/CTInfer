@@ -1,6 +1,8 @@
 **CTInfer**  
 **Compound Target Inference Tool**
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21162534.svg)](https://doi.org/10.5281/zenodo.21162534)
+
 *Technical Documentation, User Guide & GDPR Compliance*
 
 | **Version** | 1.0           |
