@@ -1,14 +1,14 @@
-**CTInfer  
-**Molecular Inhibitor Research of Target Assistant
+**CTInfer**  
+**Compound Target Inference Tool**
 
 *Documentation technique & Guide d'utilisation*
 
 |             |               |
 |-------------|---------------|
 | **Version** | 1.0           |
-| **Date**    | 25 juin 2026  |
+| **Date**    | 30 juin 2026  |
 | **Auteur**  | Maxence Belin |
-| **Statut**  | En production |
+| **Statut**  | Finalisé |
 | **Licence** | GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 |
 
 **1. Présentation**
@@ -16,23 +16,23 @@
 CTInfer (Molecular Inhibitor Research Assistant) est une application de
 bureau permettant d'identifier automatiquement les protéines inhibées
 par des composés chimiques. À partir d'une liste de composés et de leurs
-identifiants PubChem (CID), CTInfer interroge simultanément deux bases
-de données de référence PubChem et MedChemExpress extrait les cibles
+identifiants PubChem (CID), CTInfer interroge simultanément trois bases
+de données de référence, PubChem, MedChemExpress et canSAR.ai, extrait les cibles
 moléculaires, les mots-clés de détection, les descriptions biologiques
 et les références bibliographiques, puis génère un fichier Excel
 structuré.
 
 |                                                                                                                                                                                                                                    |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *CTInfer est conçu pour traiter des centaines de composés en une seule session, en combinant l'intelligence de deux sources complémentaires : PubChem (base publique NCBI) et MedChemExpress (fournisseur de composés bioactifs).* |
+| *CTInfer est conçu pour traiter des centaines de composés en une seule session, en combinant l'intelligence de trois sources complémentaires : PubChem (base publique NCBI) et MedChemExpress (fournisseur de composés bioactifs) et canSAR.ai (base oncologique du MD Anderson Cancer Center).* |
 
 ## 1.1 Problème résolu
 
 L'identification manuelle des cibles moléculaires pour un panel de
 composés est une tâche longue et répétitive. Pour chaque composé, il
-faut consulter PubChem, MedChemExpress, extraire les informations
-pertinentes, les consolider et les mettre en forme. Pour 342 composés,
-cela représente des dizaines d'heures de travail.
+faut consulter PubChem, MedChemExpress et canSAR.ia, extraire les informations
+pertinentes, les consolider et les mettre en forme. Pour plus de 500 composés,
+cela représente des heures de travail.
 
 CTInfer automatise entièrement ce processus et génère un tableau Excel
 structuré en quelques dizaines de minutes.
@@ -71,7 +71,7 @@ structuré en quelques dizaines de minutes.
 
 - Journal en temps réel avec progression par composé
 
-- Source optionnelle canSAR.ai (target affinity) : récupère les cibles
+- Interrogation de canSAR.ai (target affinity) : récupère les cibles
   validées Homo sapiens avec Mean Potency \< 1000 nM
 
 # 2. Installation
@@ -201,7 +201,7 @@ cases à cocher permettent de sélectionner les bases à interroger :
 | **☑ PubChem uniquement**       | Recherche uniquement via l'API PubChem (plus rapide)                                                                                                                                                                                            |
 | **☑ CanSAR (optionnel)**       | Interroge en plus la base canSAR.ai (target affinity) ; ne retient que les protéines dont l'organisme est Homo sapiens et dont le Mean Potency est strictement inférieur à 1000 nM. Décochée par défaut (plus lente, navigation par recherche). |
 
-## 4.2 Lancer une recherche
+## 4.3 Lancer une recherche
 
 |           |                                                                                                                                                          |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -214,21 +214,21 @@ cases à cocher permettent de sélectionner les bases à interroger :
 | **6**     | Suivre la progression dans le journal en temps réel                                                                                                      |
 | **7**     | Récupérer le fichier Results_targets.xlsx dans le dossier choisi (un suffixe \_1, \_2… est ajouté automatiquement si un fichier du même nom existe déjà) |
 
-## 4.3 Mots à exclure
+## 4.4 Mots à exclure
 
 La zone « Mots à exclure » contient des termes qui, s'ils précèdent un
 inhibiteur dans le texte, invalident la détection. Par exemple, le mot
 "not" dans "does not inhibit X" empêche X d'être listé comme cible. Les
 valeurs par défaut (not, no) sont adaptées à la majorité des cas.
 
-## 4.4 Durée estimée
+## 4.5 Durée estimée
 
 |                  |                   |                  |
 |------------------|-------------------|------------------|
 | **Volume**       | **Durée estimée** | **Note**         |
 | **30 composés**  | 5–10 minutes      | Test rapide      |
 | **100 composés** | 20–35 minutes     | Session standard |
-| **342 composés** | 60–90 minutes     | Session complète |
+| **350 composés** | 60–90 minutes     | Session complète |
 
 Le temps principal est lié à MedChemExpress (Playwright charge chaque
 page en 3–5 secondes comme un vrai navigateur). PubChem est interrogé
@@ -517,4 +517,4 @@ l'application.
 | **ANSSI Guide sécurité Python** | https://www.ssi.gouv.fr Recommandations développement sécurisé                     |
 | **canSAR.ai MD Anderson**       | https://cansar.ai Base de connaissances cancérologie (cibles, affinités, biologie) |
 
-*Document préparé le 30 juin 2026*
+*Document établi le 30 juin 2026*
